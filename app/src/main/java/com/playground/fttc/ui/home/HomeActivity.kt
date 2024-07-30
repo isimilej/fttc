@@ -1,18 +1,17 @@
-package com.playground.fttc
+package com.playground.fttc.ui.home
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.playground.fttc.ui.BaseActivity
 import com.playground.fttc.ui.theme.FTTCTheme
 
-class MainActivity : BaseActivity() {
+class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,21 +21,17 @@ class MainActivity : BaseActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    initLayout()
                 }
             }
         }
     }
 
     @Composable
-    private fun Greeting(name: String, modifier: Modifier = Modifier) {
+    private fun initLayout() {
         Text(
-            text = "Hello $name!",
-            modifier = modifier
-                .clickable {
-                    goHome()
-                }
+            text = "HOME"
         )
     }
-
 }
+
