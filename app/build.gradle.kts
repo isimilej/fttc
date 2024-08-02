@@ -67,8 +67,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    // android ktx
-    // implementation 'androidx.activity:activity-ktx:1.8.2'
-    // implementation 'androidx.fragment:fragment-ktx:1.6.2'
-    // implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
+    implementation("com.airbnb.android:lottie-compose:6.4.1")
+
 }
