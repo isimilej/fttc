@@ -4,10 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -22,16 +21,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.playground.fttc.R
 import com.playground.fttc.ui.home.HomeActivity
-import com.playground.fttc.ui.theme.FTTCTheme
+import com.playground.fttc.ui.theme.FttcTheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.playground.fttc.ui.component.PrimaryButton
 
 class LoginActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FTTCTheme {
+            FttcTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -63,7 +63,9 @@ private fun initLayout() {
         TextField(value = "password,", onValueChange = {
 
         })
-        Text(text = stringResource(id = R.string.login))
+        PrimaryButton(
+            text = stringResource(id = R.string.login),
+            modifier = Modifier.size(width = 400.dp, height = 56.dp))
         Button(
             onClick = {},
             modifier = Modifier.wrapContentSize(),
@@ -82,7 +84,7 @@ private fun initLayout() {
 @Preview
 @Composable
 fun preview() {
-    FTTCTheme {
+    FttcTheme {
         // A surface container using the 'background' color from the theme
         Surface(
             modifier = Modifier.fillMaxSize(),

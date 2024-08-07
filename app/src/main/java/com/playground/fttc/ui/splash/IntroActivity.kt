@@ -17,14 +17,14 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.playground.fttc.R
 import com.playground.fttc.ui.BaseActivity
-import com.playground.fttc.ui.theme.FTTCTheme
+import com.playground.fttc.ui.theme.FttcTheme
 import kotlinx.coroutines.delay
 
 class IntroActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FTTCTheme {
+            FttcTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
