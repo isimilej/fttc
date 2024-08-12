@@ -15,105 +15,117 @@ val Pretendards = FontFamily(
     Font(R.font.pretendard_bold, FontWeight.Bold, FontStyle.Normal),
 )
 
-val T32 = TextStyle(
-    fontFamily = Pretendards,
-    fontWeight = FontWeight.Normal,
-    fontSize = 32.sp,
-    lineHeight = 42.sp,
-    letterSpacing = 0.5.sp
-)
-
-val T32SB = T32.copy(fontWeight = FontWeight.SemiBold)
-val T32B = T32.copy(fontWeight = FontWeight.Bold)
-//
-////styleName: Heading/Headline 1/32 B;
-//font-family: Pretendard;
-//font-size: 32px;
-//font-weight: 700;
-//line-height: 42px;
-//letter-spacing: -0.5px;
-//text-align: left;
-//
-
-
-
-object FttcTextStyle {
-    val HeadLineLarge = TextStyle(
+object FttcTypo {
+    val H1 = TextStyle(
         fontFamily = Pretendards,
         fontWeight = FontWeight.Normal,
         fontSize = 32.sp,
         lineHeight = 42.sp,
         letterSpacing = (-0.5).sp,
-        color = FttcColor.Grey900,
+        color = FttcStyle.color.Grey900,
     )
-    val HeadLineLargeBold = HeadLineLarge.copy(fontWeight = FontWeight.Bold)
-    val HeadLineLargeSemiBold = HeadLineLarge.copy(fontWeight = FontWeight.SemiBold)
 
-    val HeadLine = TextStyle(
+    val H1Bold = H1.copy(fontWeight = FontWeight.Bold)
+    val H1SemiBold = H1.copy(fontWeight = FontWeight.SemiBold)
+
+    val H2 = TextStyle(
         fontFamily = Pretendards,
         fontWeight = FontWeight.Normal,
         fontSize = 28.sp,
         lineHeight = 40.sp,
         letterSpacing = (-0.5).sp,
-        color = FttcColor.Grey900,
+        color = FttcStyle.color.Grey900,
     )
-    val HeadLineBold = HeadLine.copy(fontWeight = FontWeight.Bold)
-    val HeadLineSemiBold = HeadLine.copy(fontWeight = FontWeight.SemiBold)
+    val H2Bold = H2.copy(fontWeight = FontWeight.Bold)
+    val H2SemiBold = H2.copy(fontWeight = FontWeight.SemiBold)
 
-    val HeadLineSmall = TextStyle(
+    val H3 = TextStyle(
         fontFamily = Pretendards,
         fontWeight = FontWeight.Normal,
         fontSize = 28.sp,
         lineHeight = 40.sp,
         letterSpacing = (-0.5).sp,
-        color = FttcColor.Grey900,
+        color = FttcStyle.color.Grey900,
     )
-    val HeadLineSmallBold = HeadLineSmall.copy(fontWeight = FontWeight.Bold)
-    val HeadLineSmallSemiBold = HeadLineSmall.copy(fontWeight = FontWeight.SemiBold)
+    val H3Bold = H3.copy(fontWeight = FontWeight.Bold)
+    val H3SemiBold = H3.copy(fontWeight = FontWeight.SemiBold)
 
-    val TitleLarge = TextStyle(
+    val T1 = TextStyle(
         fontFamily = Pretendards,
         fontWeight = FontWeight.Normal,
         fontSize = 22.sp,
         lineHeight = 32.sp,
         letterSpacing = (-0.5).sp,
-        color = FttcColor.Grey900,
+        color = FttcStyle.color.Grey900,
     )
-    val TitleLargeBold = TitleLarge.copy(fontWeight = FontWeight.Bold)
-    val TitleLargeSemiBold = TitleLarge.copy(fontWeight = FontWeight.SemiBold)
+    val T1Bold = T1.copy(fontWeight = FontWeight.Bold)
+    val T1SemiBold = T1.copy(fontWeight = FontWeight.SemiBold)
 
-    val TitleMedium = TextStyle(
+    val T2 = TextStyle(
         fontFamily = Pretendards,
         fontWeight = FontWeight.Normal,
         fontSize = 20.sp,
         lineHeight = 28.sp,
         letterSpacing = (-0.5).sp,
-        color = FttcColor.Grey900,
+        color = FttcStyle.color.Grey900,
     )
-    val TitleMediumBold = TitleMedium.copy(fontWeight = FontWeight.Bold)
-    val TitleMediumSemiBold = TitleMedium.copy(fontWeight = FontWeight.SemiBold)
+    val T2Bold = T2.copy(fontWeight = FontWeight.Bold)
+    val T2SemiBold = T2.copy(fontWeight = FontWeight.SemiBold)
 
-    val Title = TextStyle(
+    val T3 = TextStyle(
         fontFamily = Pretendards,
         fontWeight = FontWeight.Normal,
         fontSize = 18.sp,
         lineHeight = 26.sp,
         letterSpacing = (-0.5).sp,
-        color = FttcColor.Grey900,
+        color = FttcStyle.color.Grey900,
     )
-    val TitleBold = Title.copy(fontWeight = FontWeight.Bold)
-    val TitleSemiBold = Title.copy(fontWeight = FontWeight.SemiBold)
+    val T3Bold = T3.copy(fontWeight = FontWeight.Bold)
+    val T3SemiBold = T3.copy(fontWeight = FontWeight.SemiBold)
 
-    val TitleSmall = TextStyle(
+    val T4 = TextStyle(
         fontFamily = Pretendards,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = (-0.5).sp,
-        color = FttcColor.Grey900,
+        color = FttcStyle.color.Grey900,
     )
-    val TitleSmallBold = TitleSmall.copy(fontWeight = FontWeight.Bold)
-    val TitleSmallSemiBold = TitleSmall.copy(fontWeight = FontWeight.SemiBold)
+    val T4Bold = T4.copy(fontWeight = FontWeight.Bold)
+    val T4SemiBold = T4.copy(fontWeight = FontWeight.SemiBold)
+
+    val B1 = TextStyle(
+        fontFamily = Pretendards,
+        fontWeight = FontWeight.Normal,
+        fontSize = 18.sp,
+        lineHeight = 26.sp,
+        letterSpacing = (-0.5).sp,
+        color = FttcStyle.color.Grey900,
+    )
+    val B1Bold = B1.copy(fontWeight = FontWeight.Bold)
+    val B1SemiBold = B1.copy(fontWeight = FontWeight.SemiBold)
+
+    val B2 = TextStyle(
+        fontFamily = Pretendards,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = (-0.5).sp,
+        color = FttcStyle.color.Grey900,
+    )
+    val B2Bold = B2.copy(fontWeight = FontWeight.Bold)
+    val B2SemiBold = B2.copy(fontWeight = FontWeight.SemiBold)
+
+    val B3 = TextStyle(
+        fontFamily = Pretendards,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        letterSpacing = (-0.5).sp,
+        color = FttcStyle.color.Grey900,
+    )
+    val B3Bold = B3.copy(fontWeight = FontWeight.Bold)
+    val B3SemiBold = B3.copy(fontWeight = FontWeight.SemiBold)
 
 }
 

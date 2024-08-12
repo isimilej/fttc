@@ -20,7 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playground.fttc.R
 import com.playground.fttc.ui.theme.FttcColor
-import com.playground.fttc.ui.theme.FttcTextStyle
+import com.playground.fttc.ui.theme.FttcStyle
+import com.playground.fttc.ui.theme.FttcTypo
 
 @Composable
 fun PrimaryButton(
@@ -35,8 +36,8 @@ fun PrimaryButton(
         onClick = {},
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (pressed) FttcColor.Blue700 else FttcColor.Primary,
-            disabledContainerColor = FttcColor.Grey100
+            containerColor = if (pressed) FttcStyle.color.Blue700 else FttcStyle.color.Primary,
+            disabledContainerColor = FttcStyle.color.Grey100
         ),
         enabled = enabled,
         shape = RoundedCornerShape(12.dp),
@@ -45,8 +46,8 @@ fun PrimaryButton(
     ) {
         Text(
             text = text,
-            style = FttcTextStyle.TitleMediumSemiBold,
-            color = if (enabled) FttcColor.White else FttcColor.Grey300
+            style = FttcStyle.typo.T2SemiBold,
+            color = if (enabled) FttcStyle.color.White else FttcStyle.color.Grey300
         )
     }
 }
@@ -88,8 +89,8 @@ fun PrimaryMediumButton(
         onClick = {},
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (pressed) FttcColor.Blue700 else FttcColor.Primary,
-            disabledContainerColor = FttcColor.Grey100
+            containerColor = if (pressed) FttcStyle.color.Blue700 else FttcStyle.color.Primary,
+            disabledContainerColor = FttcStyle.color.Grey100
         ),
         enabled = enabled,
         shape = RoundedCornerShape(8.dp),
@@ -98,8 +99,8 @@ fun PrimaryMediumButton(
     ) {
         Text(
             text = text,
-            style = FttcTextStyle.TitleSmallSemiBold,
-            color = if (enabled) FttcColor.White else FttcColor.Grey300
+            style = FttcStyle.typo.T4SemiBold,
+            color = if (enabled) FttcStyle.color.White else FttcStyle.color.Grey300
         )
     }
 }
@@ -129,8 +130,8 @@ fun PrimarySmallButton(
         onClick = {},
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (pressed) FttcColor.Blue900 else FttcColor.Blue800,
-            disabledContainerColor = FttcColor.Grey100
+            containerColor = if (pressed) FttcStyle.color.Blue900 else FttcStyle.color.Blue800,
+            disabledContainerColor = FttcStyle.color.Grey100
         ),
         enabled = enabled,
         shape = RoundedCornerShape(8.dp),
@@ -139,8 +140,8 @@ fun PrimarySmallButton(
     ) {
         Text(
             text = text,
-            style = FttcTextStyle.TitleSmallSemiBold,
-            color = if (enabled) FttcColor.White else FttcColor.Grey300
+            style = FttcStyle.typo.T4SemiBold,
+            color = if (enabled) FttcStyle.color.White else FttcStyle.color.Grey300
         )
     }
 }
