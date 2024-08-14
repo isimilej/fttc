@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
 import com.playground.fttc.ui.theme.FttcStyle
@@ -20,13 +21,17 @@ class HomeActivity : ComponentActivity() {
             val b: androidx.compose.material3.windowsizeclass.WindowWidthSizeClass = calculateWindowSizeClass(this).widthSizeClass
             Log.d("FTTC", "$b")
 
+
+            val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
+            val isExpandedScreen = widthSizeClass == WindowWidthSizeClass.Expanded
+
             FttcTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = FttcStyle.color.Background
                 ) {
-                    HomeScreen()
+                    HomeScreen(isExpandedScreen)
                 }
             }
         }
