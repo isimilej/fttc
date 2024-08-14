@@ -23,6 +23,7 @@ import com.playground.fttc.R
 import com.playground.fttc.ui.home.HomeActivity
 import com.playground.fttc.ui.theme.FttcTheme
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.playground.fttc.ui.component.PrimaryButton
 
@@ -56,6 +57,8 @@ class LoginActivity : ComponentActivity() {
 @Composable
 private fun initLayout() {
 
+    val context = LocalContext.current
+
     Column {
         TextField(value = "id,", onValueChange = {
 
@@ -64,21 +67,12 @@ private fun initLayout() {
 
         })
         PrimaryButton(
+            onClick = {
+                context.startActivity(Intent(context, HomeActivity::class.java))
+            },
             text = stringResource(id = R.string.login),
             modifier = Modifier.size(width = 400.dp, height = 56.dp))
-        Button(
-            onClick = {},
-            modifier = Modifier.wrapContentSize(),
-            colors = ButtonDefaults.buttonColors(
-                contentColor = Color.Black,
-                containerColor = Color.Red,
-            ),
-            shape = RoundedCornerShape(10.dp)
-        ) {
-            Text(text = "Login")
-        }
     }
-
 }
 
 @Preview

@@ -12,6 +12,7 @@ val Pink40 = Color(0xFF7D5260)
 
 object FttcColor {
     val White = Color.White
+    val Background = White
 
     // Grey Scale Color
     val Grey900 = Color(0xFF101116)
