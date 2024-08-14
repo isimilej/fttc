@@ -25,6 +25,7 @@ import com.playground.fttc.ui.theme.FttcTypo
 
 @Composable
 fun PrimaryButton(
+    onClick: () -> Unit,
     text: String,
     modifier: Modifier = Modifier,
     enabled: Boolean = true
@@ -33,7 +34,7 @@ fun PrimaryButton(
     val pressed by interactionSource.collectIsPressedAsState()
     Log.d("Fttc", "Pressed=$pressed")
     Button(
-        onClick = {},
+        onClick = onClick,
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
             containerColor = if (pressed) FttcStyle.color.Blue700 else FttcStyle.color.Primary,
@@ -57,8 +58,9 @@ fun PrimaryButton(
 fun PreviewPrimaryButton() {
     Box(contentAlignment = Alignment.Center) {
         PrimaryButton(
-            stringResource(id = R.string.login),
-            Modifier.size(width = 320.dp, height = 56.dp),
+            onClick = {},
+            text = stringResource(id = R.string.login),
+            modifier = Modifier.size(width = 320.dp, height = 56.dp),
             enabled = true
         )
     }
@@ -69,8 +71,9 @@ fun PreviewPrimaryButton() {
 fun PreviewDisabledPrimaryButton() {
     Box(contentAlignment = Alignment.Center) {
         PrimaryButton(
-            stringResource(id = R.string.login),
-            Modifier.size(width = 320.dp, height = 56.dp),
+            onClick = {},
+            text = stringResource(id = R.string.login),
+            modifier = Modifier.size(width = 320.dp, height = 56.dp),
             enabled = false
         )
     }
