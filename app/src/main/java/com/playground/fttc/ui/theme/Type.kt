@@ -127,6 +127,21 @@ object FttcTypo {
     val B3Bold = B3.copy(fontWeight = FontWeight.Bold)
     val B3SemiBold = B3.copy(fontWeight = FontWeight.SemiBold)
 
+    val Base = TextStyle(
+        fontFamily = Pretendards,
+        fontWeight = FontWeight.Normal,
+        color = FttcStyle.color.Grey900,
+    )
+
+//    //styleName: Heading/Headline 2/28 B;
+//    font-family: Pretendard;
+//    font-size: 28px;
+//    font-weight: 700;
+//    line-height: 40px;
+//    letter-spacing: -0.5px;
+//    text-align: center;
+
+
 }
 
 
