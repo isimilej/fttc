@@ -20,8 +20,11 @@ class HomeActivity : ComponentActivity() {
         setContent {
             val b: androidx.compose.material3.windowsizeclass.WindowWidthSizeClass = calculateWindowSizeClass(this).widthSizeClass
             Log.d("FTTC", "$b")
+            //WindowWidthSizeClass.Expanded
+            //WindowWidthSizeClass.Medium
+            //WindowWidthSizeClass.Compact
 
-
+            //widthSizeClass: WindowWidthSizeClass
             val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
             val isExpandedScreen = widthSizeClass == WindowWidthSizeClass.Expanded
 

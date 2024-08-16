@@ -50,6 +50,25 @@ fun HomeContentExpanded() {
 }
 
 @Composable
+fun HomeMediumScreen() {
+    val detailLazyListStates = rememberLazyListState()
+    LazyColumn(
+        modifier = Modifier.fillMaxWidth(),
+        state = detailLazyListStates
+    ) {
+        item {
+            HomeMainCard()
+        }
+        item {
+            Row {
+                HomeMapCard()
+                HomeDocumentCard()
+            }
+        }
+    }
+}
+
+@Composable
 fun HomeContent() {
     val detailLazyListStates = rememberLazyListState()
     LazyColumn(
@@ -123,26 +142,6 @@ private fun HomeMainCard() {
 }
 
 @Composable
-private fun HomeDocumentCard() {
-    Card(
-        modifier = Modifier.width(400.dp),
-        shape = RoundedCornerShape(32.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = FttcStyle.color.Blue800
-        ),
-        elevation = CardDefaults.outlinedCardElevation(
-            defaultElevation = 16.dp
-        )
-    ) {
-        Text(text = "333333")
-        Image(
-            painter = painterResource(id = R.drawable.ic_home_document),
-            null
-        )
-    }
-}
-
-@Composable
 private fun HomeMapCard() {
     Card(
         modifier = Modifier.width(400.dp),
@@ -190,11 +189,18 @@ private fun Header() {
     }
 }
 
-//@Preview(showSystemUi = true, showBackground = true, device = Devices.PHONE)
-//@Composable
-//fun PreviewHomeScreen() {
-//    HomeScreen(false)
-//}
+@Preview(showSystemUi = true, showBackground = true, device = Devices.PHONE)
+@Composable
+fun PreviewHomeScreen() {
+    HomeScreen(false)
+}
+
+@Preview("Home Expanded", showSystemUi = true, showBackground = true, device = "spec:width=800dp,height=1280dp,dpi=320")
+@Composable
+fun PreviewMediumHomeScreen() {
+    HomeMediumScreen()
+    //HomeScreen(false)
+}
 
 @Preview("Home Expanded", showSystemUi = true, showBackground = true, device = Devices.TABLET)
 @Composable
