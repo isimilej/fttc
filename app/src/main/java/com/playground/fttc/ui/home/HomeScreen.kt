@@ -41,7 +41,7 @@ fun HomeContentExpanded() {
             ) {
                 HomeMainCard()
                 Column {
-                    HomeMapCard()
+                    HomeLocationCard()
                     HomeDocumentCard(10)
                 }
             }
@@ -61,7 +61,7 @@ fun HomeMediumScreen() {
         }
         item {
             Row {
-                HomeMapCard()
+                HomeLocationCard()
                 HomeDocumentCard(5)
             }
         }
@@ -79,7 +79,7 @@ fun HomeContent() {
             HomeMainCard()
         }
         item {
-            HomeMapCard()
+            HomeLocationCard()
         }
         item {
             HomeDocumentCard(10)
@@ -137,29 +137,6 @@ private fun HomeMainCard() {
         )
         Text(
             text = "고객정보 등록/변경 고객확인의무(CDD/EDD) 상품추천 펀드 신규가입 금리인하"
-        )
-    }
-}
-
-@Composable
-private fun HomeMapCard() {
-    Card(
-        modifier = Modifier.width(400.dp),
-        shape = RoundedCornerShape(32.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = FttcStyle.color.Blue400
-        ),
-        elevation = CardDefaults.outlinedCardElevation(
-            defaultElevation = 16.dp
-        )
-    ) {
-        Text(text = "신규고객 찾기 슈퍼맵")
-        Text(text = "지도에서 내주변")
-        Text(text = "신규고객 찾기 슈퍼맵")
-        Text(text = "바로가기")
-        Image(
-            painter = painterResource(id = R.drawable.home_map_marker),
-            null
         )
     }
 }
