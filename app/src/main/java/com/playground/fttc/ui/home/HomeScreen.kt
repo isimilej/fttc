@@ -42,7 +42,7 @@ fun HomeContentExpanded() {
                 HomeMainCard()
                 Column {
                     HomeMapCard()
-                    HomeDocumentCard()
+                    HomeDocumentCard(10)
                 }
             }
         }
@@ -62,7 +62,7 @@ fun HomeMediumScreen() {
         item {
             Row {
                 HomeMapCard()
-                HomeDocumentCard()
+                HomeDocumentCard(5)
             }
         }
     }
@@ -82,7 +82,7 @@ fun HomeContent() {
             HomeMapCard()
         }
         item {
-            HomeDocumentCard()
+            HomeDocumentCard(10)
         }
     }
 }

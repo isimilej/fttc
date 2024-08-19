@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">FTTC</string>
 
+    <!-- Common -->
+    <string name="count">건</string>
+
     <!-- 로그인 -->
     <string name="login">로그인</string>
+
+    <!-- 홈 -->
+    <string name="extension_of_period_customer">여신 기간연장\n서식 작성 가능 고객</string>
+
 </resources>
