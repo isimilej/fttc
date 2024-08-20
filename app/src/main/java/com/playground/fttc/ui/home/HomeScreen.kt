@@ -39,7 +39,7 @@ fun HomeContentExpanded() {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                HomeMainCard()
+                HomeSearchCard()
                 Column {
                     HomeLocationCard()
                     HomeDocumentCard(10)
@@ -57,7 +57,7 @@ fun HomeMediumScreen() {
         state = detailLazyListStates
     ) {
         item {
-            HomeMainCard()
+            HomeSearchCard()
         }
         item {
             Row {
@@ -76,7 +76,7 @@ fun HomeContent() {
         state = detailLazyListStates
     ) {
         item {
-            HomeMainCard()
+            HomeSearchCard()
         }
         item {
             HomeLocationCard()
@@ -84,60 +84,6 @@ fun HomeContent() {
         item {
             HomeDocumentCard(10)
         }
-    }
-}
-
-@Composable
-private fun HomeMainCard() {
-    Card(
-        shape = RoundedCornerShape(32.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = FttcStyle.color.Blue100
-        ),
-        elevation = CardDefaults.outlinedCardElevation(
-            defaultElevation = 16.dp
-        )
-    ) {
-        Text(
-            text = "신규 고객 발굴부터 기존 기업고객 상담을 위해",
-            style = FttcStyle.typo.B1SemiBold.copy(color = FttcStyle.color.Grey500)
-        )
-        Text(
-            text = "기업정보를 쉽고 빠르게 검색해보세요",
-            style = FttcStyle.typo.H2Bold
-        )
-        Text(
-            text = "기업명을 입력해 주세요",
-        )
-        Text(
-            text = "3월 경영평가 1등 지점에서 가장 많이 쓴 메뉴 TOP3!"
-        )
-        LazyRow {
-            item {
-                Image(
-                    painter = painterResource(id = R.drawable.home_top3_first_bg),
-                    null
-                )
-            }
-            item {
-                Image(
-                    painter = painterResource(id = R.drawable.home_top3_second_bg),
-                    null
-                )
-            }
-            item {
-                Image(
-                    painter = painterResource(id = R.drawable.home_top3_third_bg),
-                    null
-                )
-            }
-        }
-        Text(
-            text = "마이메뉴"
-        )
-        Text(
-            text = "고객정보 등록/변경 고객확인의무(CDD/EDD) 상품추천 펀드 신규가입 금리인하"
-        )
     }
 }
 
