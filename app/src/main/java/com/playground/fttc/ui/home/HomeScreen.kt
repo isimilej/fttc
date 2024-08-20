@@ -43,6 +43,7 @@ fun HomeContentExpanded() {
                 Column {
                     HomeLocationCard()
                     HomeDocumentCard(10)
+                    HomeSendCard()
                 }
             }
         }
