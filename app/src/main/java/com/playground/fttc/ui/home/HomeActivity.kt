@@ -30,12 +30,12 @@ class HomeActivity : ComponentActivity() {
 
             FttcTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = FttcStyle.color.Background
-                ) {
-                    HomeScreen(isExpandedScreen)
-                }
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = FttcStyle.color.Background
+//                ) {
+                    HomeScreen(widthSizeClass, isExpandedScreen)
+//                }
             }
         }
     }
