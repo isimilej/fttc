@@ -28,9 +28,9 @@ import com.playground.fttc.ui.theme.FttcStyle
 import com.playground.fttc.ui.theme.FttcTheme
 
 @Composable
-fun HomeDocumentCard(count: Int) {
+fun HomeDocumentCard(count: Int, modifier: Modifier = Modifier) {
     Card(
-        modifier = Modifier.width(400.dp),
+        modifier = modifier.width(400.dp),
         shape = RoundedCornerShape(32.dp),
         colors = CardDefaults.cardColors(
             containerColor = FttcStyle.color.White

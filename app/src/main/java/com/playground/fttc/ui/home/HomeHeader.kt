@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -37,73 +36,111 @@ fun HomeHeader() {
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        Row {
-            Card(
-                modifier = Modifier.size(48.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = FttcStyle.color.White
-                ),
-                elevation = CardDefaults.outlinedCardElevation(
-                    defaultElevation = 4.dp
-                )
-            ) {
-                Box(
-                    modifier = Modifier.size(48.dp),
-                ) {
-                    Image(
-                        painterResource(id = R.drawable.ic_home),
-                        null,
-                        modifier = Modifier
-                            .size(32.dp)
-                            .align(Alignment.Center)
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.width(24.dp))
-            Column {
-                Text(
-                    text = "박기업 차장",
-                    style = FttcStyle.typo.T3Bold
-                )
-                Text(
-                    text = "강동강북여신심사센터",
-                    style = FttcStyle.typo.B3SemiBold.copy(color = FttcStyle.color.Grey500)
-                )
-            }
-        }
+        HomeHeaderUserLayout()
+        HomeHeaderMenuLayout()
+    }
+}
 
-        Row {
-            Image(
-                painterResource(id = R.drawable.ic_logout),
-                null,
-                modifier = Modifier.size(48.dp)
+@Composable
+private fun HomeHeaderUserLayout() {
+    Row {
+        HomeHeaderHomeCard()
+        Spacer(modifier = Modifier.width(24.dp))
+        Column {
+            Text(
+                text = "박기업 차장",
+                style = FttcStyle.typo.T3Bold
             )
-            Image(
-                painterResource(id = R.drawable.ic_alarm_on),
-                null,
-                modifier = Modifier.size(48.dp)
-            )
-            Image(
-                painterResource(id = R.drawable.ic_calendar),
-                null,
-                modifier = Modifier.size(48.dp)
-            )
-            Image(
-                painterResource(id = R.drawable.ic_menu),
-                null,
-                modifier = Modifier.size(48.dp)
+            Text(
+                text = "강동강북여신심사센터",
+                style = FttcStyle.typo.B3SemiBold.copy(color = FttcStyle.color.Grey500)
             )
         }
     }
 }
+
+@Composable
+private fun HomeHeaderHomeCard() {
+    Card(
+        modifier = Modifier.size(48.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = FttcStyle.color.White
+        ),
+        elevation = CardDefaults.outlinedCardElevation(
+            defaultElevation = 4.dp
+        )
+    ) {
+        Box(
+            modifier = Modifier.size(48.dp),
+        ) {
+            Image(
+                painterResource(id = R.drawable.ic_home),
+                null,
+                modifier = Modifier
+                    .size(32.dp)
+                    .align(Alignment.Center)
+            )
+        }
+    }
+}
+
+
+@Composable
+private fun HomeHeaderMenuLayout() {
+    Row {
+        Image(
+            painterResource(id = R.drawable.ic_logout),
+            null,
+            modifier = Modifier.size(48.dp)
+        )
+        Image(
+            painterResource(id = R.drawable.ic_alarm_on),
+            null,
+            modifier = Modifier.size(48.dp)
+        )
+        Image(
+            painterResource(id = R.drawable.ic_calendar),
+            null,
+            modifier = Modifier.size(48.dp)
+        )
+        Image(
+            painterResource(id = R.drawable.ic_menu),
+            null,
+            modifier = Modifier.size(48.dp)
+        )
+    }
+}
+
+//@Preview(widthDp = 480)
+//@Composable
+//fun PreviewHomeHeader() {
+//    FttcTheme {
+//        HomeHeader()
+//    }
+//}
+//
+//@Preview(widthDp = 640)
+//@Composable
+//fun PreviewHomeHeader() {
+//    FttcTheme {
+//        HomeHeader()
+//    }
+//}
 
 @Preview
 @Composable
+fun PreviewHomeHeaderHomeCard() {
+    HomeHeaderHomeCard()
+}
+
+@Preview(widthDp = 840)
+@Composable
 fun PreviewHomeHeader() {
     FttcTheme {
-        Surface {
-            HomeHeader()
-        }
+        HomeHeader()
     }
 }
+
+
+
