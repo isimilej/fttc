@@ -103,14 +103,15 @@ fun HomeScreen(isExpandedScreen: Boolean) {
 
 @Composable
 private fun Header() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(62.dp)
-            .background(FttcStyle.color.Blue50),
-    ) {
-        Text("박기업 차장")
-    }
+    HomeHeader()
+//    Row(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .height(62.dp)
+//            .background(FttcStyle.color.Blue50),
+//    ) {
+//        Text("박기업 차장")
+//    }
 }
 
 @Preview(showSystemUi = true, showBackground = true, device = Devices.PHONE)
