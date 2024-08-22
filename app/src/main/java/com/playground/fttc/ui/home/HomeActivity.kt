@@ -29,13 +29,12 @@ class HomeActivity : ComponentActivity() {
             val isExpandedScreen = widthSizeClass == WindowWidthSizeClass.Expanded
 
             FttcTheme {
-                // A surface container using the 'background' color from the theme
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = FttcStyle.color.Background
-//                ) {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = FttcStyle.color.Background
+                ) {
                     HomeScreen(widthSizeClass, isExpandedScreen)
-//                }
+                }
             }
         }
     }

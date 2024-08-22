@@ -22,7 +22,7 @@ import com.playground.fttc.ui.theme.FttcTheme
 @Composable
 fun HomeSendCard(modifier: Modifier = Modifier) {
     Card(
-        modifier = modifier.width(400.dp).height(56.dp),
+        modifier = modifier.height(64.dp),
         shape = RoundedCornerShape(32.dp),
         colors = CardDefaults.cardColors(
             containerColor = FttcStyle.color.White

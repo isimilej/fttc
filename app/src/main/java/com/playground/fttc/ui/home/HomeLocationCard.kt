@@ -2,6 +2,7 @@ package com.playground.fttc.ui.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,14 +30,14 @@ import com.playground.fttc.ui.theme.FttcTheme
 @Composable
 fun HomeSuperMapCard(modifier: Modifier = Modifier) {
     Card(
-        modifier = modifier.width(400.dp),
+        modifier = modifier.height(IntrinsicSize.Max),
         shape = RoundedCornerShape(32.dp),
         colors = CardDefaults.cardColors(
             containerColor = FttcStyle.color.White
         ),
         elevation = CardDefaults.outlinedCardElevation(
             defaultElevation = 16.dp
-        )
+        ),
     ) {
         Column(
             modifier = Modifier
