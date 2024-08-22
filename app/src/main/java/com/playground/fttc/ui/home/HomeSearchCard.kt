@@ -30,7 +30,7 @@ import com.playground.fttc.ui.theme.FttcTheme
 @Composable
 fun HomeSearchCard(modifier: Modifier = Modifier) {
     Card(
-        modifier = modifier.width(696.dp).height(632.dp),
+        modifier = modifier.height(632.dp),
         shape = RoundedCornerShape(32.dp),
         colors = CardDefaults.cardColors(
             containerColor = FttcStyle.color.White
