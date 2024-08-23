@@ -39,6 +39,7 @@ object FttcColor {
     val Blue100 = Color(0xFFE4F2FF)
     val Blue50 = Color(0xFFF3F9FF)
     val Primary = Blue500
+    val Brand = Blue500
 
     // Secondary Scale Color
     val Orange900 = Color(0xFF71271C)

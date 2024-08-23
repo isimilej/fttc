@@ -32,7 +32,6 @@ fun PrimaryButton(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
-    Log.d("Fttc", "Pressed=$pressed")
     Button(
         onClick = onClick,
         modifier = modifier,
