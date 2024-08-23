@@ -23,7 +23,7 @@ import com.playground.fttc.ui.theme.FttcStyle
 
 @Composable
 fun InputField(
-    text: String,
+    value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     hint: String = "",
@@ -34,7 +34,7 @@ fun InputField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
     BaseOutlinedTextField(
-        value = text,
+        value = value,
         onValueChange = onValueChange,
         modifier = modifier.height(52.dp),
         enabled = enabled,

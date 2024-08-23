@@ -13,11 +13,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.playground.fttc.ui.home.HomeActivity
 import com.playground.fttc.ui.theme.FttcTheme
 import androidx.compose.ui.tooling.preview.Devices
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 
 class LoginActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            hide(WindowInsetsCompat.Type.navigationBars())
+        }
+
         setContent {
             FttcTheme {
                 // A surface container using the 'background' color from the theme
