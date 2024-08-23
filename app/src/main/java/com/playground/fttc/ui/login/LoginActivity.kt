@@ -4,28 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.playground.fttc.R
 import com.playground.fttc.ui.home.HomeActivity
 import com.playground.fttc.ui.theme.FttcTheme
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
-import com.playground.fttc.ui.component.PrimaryButton
+import androidx.compose.ui.tooling.preview.Devices
 
 class LoginActivity : ComponentActivity() {
 
@@ -38,7 +25,7 @@ class LoginActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    initLayout()
+                    HomeScreen()
                 }
             }
         }
@@ -51,40 +38,5 @@ class LoginActivity : ComponentActivity() {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         })
-    }
-}
-
-@Composable
-private fun initLayout() {
-
-    val context = LocalContext.current
-
-    Column {
-        TextField(value = "id,", onValueChange = {
-
-        }, singleLine = true)
-        TextField(value = "password,", onValueChange = {
-
-        })
-        PrimaryButton(
-            onClick = {
-                context.startActivity(Intent(context, HomeActivity::class.java))
-            },
-            text = stringResource(id = R.string.login),
-            modifier = Modifier.size(width = 400.dp, height = 56.dp))
-    }
-}
-
-@Preview
-@Composable
-fun preview() {
-    FttcTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            initLayout()
-        }
     }
 }

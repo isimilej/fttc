@@ -23,6 +23,7 @@ object FttcColor {
     val Grey400 = Color(0xFF979BAA)
     val Grey300 = Color(0xFFB1B5C3)
     val Grey200 = Color(0xFFC5C8D3)
+    val Grey150 = Color(0xFFD3D6DE)
     val Grey100 = Color(0xFFE1E3EA)
     val Grey50 = Color(0xFFF3F4F7)
 
