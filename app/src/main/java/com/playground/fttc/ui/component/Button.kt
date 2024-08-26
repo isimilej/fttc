@@ -1,34 +1,76 @@
 package com.playground.fttc.ui.component
 
-import android.util.Log
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.playground.fttc.R
-import com.playground.fttc.ui.theme.FttcColor
 import com.playground.fttc.ui.theme.FttcStyle
-import com.playground.fttc.ui.theme.FttcTypo
+
+data class FttcButtonColors(
+    val enabledContentColor: Color,
+    val disabledContentColor: Color,
+    val enabledContainerColor: Color,
+    val pressedContainerColor: Color,
+    val disabledContainerColor: Color,
+) {
+    fun contentColor(enabled: Boolean) = if (enabled) enabledContentColor else disabledContentColor
+    fun containerColor(pressed: Boolean) = if (pressed) pressedContainerColor else enabledContainerColor
+}
+
+object FttcButtonDefaults {
+    
+    fun primaryButtonColors(): FttcButtonColors {
+        return FttcButtonColors(
+            enabledContentColor = FttcStyle.color.White,
+            disabledContentColor = FttcStyle.color.Grey300,
+            enabledContainerColor = FttcStyle.color.Primary,
+            pressedContainerColor = FttcStyle.color.Blue700,
+            disabledContainerColor = FttcStyle.color.Grey100
+        )
+    }
+
+    fun buttonColors(): FttcButtonColors {
+        return FttcButtonColors(
+            enabledContentColor = FttcStyle.color.Grey900,
+            disabledContentColor = FttcStyle.color.Grey300,
+            enabledContainerColor = FttcStyle.color.White,
+            pressedContainerColor = FttcStyle.color.Grey50,
+            disabledContainerColor = FttcStyle.color.White
+        )
+    }
+
+}
 
 @Composable
-fun PrimaryButton(
-    onClick: () -> Unit,
+fun BaseFttcButton(
     text: String,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    textStyle: TextStyle = LocalTextStyle.current,
+    shape: Shape = ButtonDefaults.shape,
+    colors: FttcButtonColors,
+    border: BorderStroke? = null,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
@@ -36,125 +78,152 @@ fun PrimaryButton(
         onClick = onClick,
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (pressed) FttcStyle.color.Blue700 else FttcStyle.color.Primary,
-            disabledContainerColor = FttcStyle.color.Grey100
+            containerColor = colors.containerColor(pressed),
+            disabledContainerColor = colors.disabledContainerColor
         ),
+        border = border,
         enabled = enabled,
-        shape = RoundedCornerShape(12.dp),
+        shape = shape,
         contentPadding = PaddingValues(horizontal = 16.dp),
-        interactionSource = interactionSource
+        interactionSource = interactionSource,
     ) {
         Text(
             text = text,
-            style = FttcStyle.typo.T2SemiBold,
-            color = if (enabled) FttcStyle.color.White else FttcStyle.color.Grey300
+            style = textStyle,
+            color = colors.contentColor(enabled)
         )
     }
 }
 
-@Preview("PrimaryButton", widthDp = 360, heightDp = 64)
+@Composable
+fun PrimaryFttcButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+) = BaseFttcButton(
+    text = text,
+    onClick = onClick,
+    modifier.height(56.dp),
+    enabled = enabled,
+    textStyle = FttcStyle.typo.T3SemiBold,
+    shape = RoundedCornerShape(12.dp),
+    colors = FttcButtonDefaults.primaryButtonColors()
+)
+
+@Composable
+fun PopupPrimaryFttcButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+) = BaseFttcButton(
+    text = text,
+    onClick = onClick,
+    modifier.height(48.dp),
+    enabled = enabled,
+    textStyle = FttcStyle.typo.T4SemiBold,
+    shape = RoundedCornerShape(8.dp),
+    colors = FttcButtonDefaults.primaryButtonColors()
+)
+
+@Composable
+fun FttcButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+) = BaseFttcButton(
+    text = text,
+    onClick = onClick,
+    modifier.height(56.dp),
+    enabled = enabled,
+    textStyle = FttcStyle.typo.T3SemiBold,
+    shape = RoundedCornerShape(12.dp),
+    colors = FttcButtonDefaults.buttonColors(),
+    border = BorderStroke(1.dp, FttcStyle.color.Grey150)
+)
+
+@Composable
+fun PopupFttcButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+) = BaseFttcButton(
+    text = text,
+    onClick = onClick,
+    modifier.height(48.dp),
+    enabled = enabled,
+    textStyle = FttcStyle.typo.T4SemiBold,
+    shape = RoundedCornerShape(8.dp),
+    colors = FttcButtonDefaults.buttonColors(),
+    border = BorderStroke(1.dp, FttcStyle.color.Grey150)
+)
+
+@Preview
 @Composable
 fun PreviewPrimaryButton() {
-    Box(contentAlignment = Alignment.Center) {
-        PrimaryButton(
+    Column(Modifier.padding(10.dp)) {
+        PrimaryFttcButton(
+            text = "Primary Button",
             onClick = {},
-            text = stringResource(id = R.string.login),
-            modifier = Modifier.size(width = 320.dp, height = 56.dp),
-            enabled = true
+            Modifier.width(220.dp)
         )
-    }
-}
-
-@Preview("Disabled PrimaryButton", widthDp = 360, heightDp = 64)
-@Composable
-fun PreviewDisabledPrimaryButton() {
-    Box(contentAlignment = Alignment.Center) {
-        PrimaryButton(
+        Spacer(Modifier.height(8.dp))
+        PrimaryFttcButton(
+            text = "Primary Button",
             onClick = {},
-            text = stringResource(id = R.string.login),
-            modifier = Modifier.size(width = 320.dp, height = 56.dp),
+            Modifier.width(220.dp),
             enabled = false
         )
-    }
-}
-
-@Composable
-fun PrimaryMediumButton(
-    text: String,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true
-) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val pressed by interactionSource.collectIsPressedAsState()
-    Log.d("Fttc", "Pressed=$pressed")
-    Button(
-        onClick = {},
-        modifier = modifier,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = if (pressed) FttcStyle.color.Blue700 else FttcStyle.color.Primary,
-            disabledContainerColor = FttcStyle.color.Grey100
-        ),
-        enabled = enabled,
-        shape = RoundedCornerShape(8.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp),
-        interactionSource = interactionSource
-    ) {
-        Text(
-            text = text,
-            style = FttcStyle.typo.T4SemiBold,
-            color = if (enabled) FttcStyle.color.White else FttcStyle.color.Grey300
+        Spacer(Modifier.height(16.dp))
+        PopupPrimaryFttcButton(
+            text = "Popup Primary Button",
+            onClick = {},
+            Modifier.width(220.dp),
+        )
+        Spacer(Modifier.height(8.dp))
+        PopupPrimaryFttcButton(
+            text = "Popup Primary Button",
+            onClick = {},
+            Modifier.width(220.dp),
+            enabled = false,
         )
     }
 }
 
-@Preview("Medium PrimaryButton", widthDp = 360, heightDp = 64)
+@Preview
 @Composable
-fun PreviewPrimaryMediumButton() {
-    Box(contentAlignment = Alignment.Center) {
-        PrimaryMediumButton(
-            stringResource(id = R.string.login),
-            Modifier.size(width = 320.dp, height = 48.dp),
+fun PreviewFttcButton() {
+    Column(Modifier.padding(10.dp)) {
+        FttcButton(
+            text = "Button",
+            onClick = {},
+            Modifier.width(180.dp)
+        )
+        Spacer(Modifier.height(8.dp))
+        FttcButton(
+            text = "Button",
+            onClick = {},
+            Modifier.width(180.dp),
+            enabled = false
+        )
+
+        // Preview PopupFttcButtons
+        Spacer(Modifier.height(16.dp))
+        PopupFttcButton(
+            text = "Popup Button",
+            onClick = {},
+            Modifier.width(180.dp),
+        )
+        Spacer(Modifier.height(8.dp))
+        PopupFttcButton(
+            text = "Popup Button",
+            onClick = {},
+            Modifier.width(180.dp),
+            enabled = false,
         )
     }
 }
 
-
-@Composable
-fun PrimarySmallButton(
-    text: String,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true
-) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val pressed by interactionSource.collectIsPressedAsState()
-    Log.d("Fttc", "Pressed=$pressed")
-    Button(
-        onClick = {},
-        modifier = modifier,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = if (pressed) FttcStyle.color.Blue900 else FttcStyle.color.Blue800,
-            disabledContainerColor = FttcStyle.color.Grey100
-        ),
-        enabled = enabled,
-        shape = RoundedCornerShape(8.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp),
-        interactionSource = interactionSource
-    ) {
-        Text(
-            text = text,
-            style = FttcStyle.typo.T4SemiBold,
-            color = if (enabled) FttcStyle.color.White else FttcStyle.color.Grey300
-        )
-    }
-}
-
-@Preview("Small PrimaryButton", widthDp = 360, heightDp = 64)
-@Composable
-fun PreviewPrimarySmallButton() {
-    Box(contentAlignment = Alignment.Center) {
-        PrimarySmallButton(
-            stringResource(id = R.string.login),
-            Modifier.size(width = 320.dp, height = 48.dp),
-        )
-    }
-}

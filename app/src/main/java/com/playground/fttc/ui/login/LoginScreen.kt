@@ -36,7 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playground.fttc.R
 import com.playground.fttc.ui.component.InputField
-import com.playground.fttc.ui.component.PrimaryButton
+import com.playground.fttc.ui.component.PrimaryFttcButton
 import com.playground.fttc.ui.home.HomeActivity
 import com.playground.fttc.ui.theme.FttcStyle
 import com.playground.fttc.ui.theme.FttcTheme
@@ -83,7 +83,7 @@ fun HomeScreen() {
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(Modifier.height(48.dp))
-                PrimaryButton(
+                PrimaryFttcButton(
                     onClick = {
                         context.startActivity(Intent(context, HomeActivity::class.java))
                     },
