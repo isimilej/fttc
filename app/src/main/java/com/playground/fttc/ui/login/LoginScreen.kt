@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -24,18 +25,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playground.fttc.R
-import com.playground.fttc.ui.component.InputField
+import com.playground.fttc.ui.component.FttcAlertDialog
+import com.playground.fttc.ui.component.FttcTextField
 import com.playground.fttc.ui.component.PrimaryFttcButton
 import com.playground.fttc.ui.home.HomeActivity
 import com.playground.fttc.ui.theme.FttcStyle
@@ -45,6 +51,27 @@ import com.playground.fttc.ui.theme.FttcTheme
 fun HomeScreen() {
 
     val context = LocalContext.current
+
+    var showLoginUserIdEmptyErrorDialog by rememberSaveable { mutableStateOf(false) }
+    var showLoginPasswordEmptyErrorDialog by rememberSaveable { mutableStateOf(false) }
+    var showLoginNotMatchedErrorDialog by rememberSaveable { mutableStateOf(false) }
+
+    var userId by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+
+    if (showLoginUserIdEmptyErrorDialog) {
+        FttcAlertDialog("아이디를 입력해 주세요.") {
+            showLoginUserIdEmptyErrorDialog = false
+        }
+    } else if (showLoginPasswordEmptyErrorDialog) {
+        FttcAlertDialog("비밀번호를 입력해 주세요.") {
+            showLoginPasswordEmptyErrorDialog = false
+        }
+    } else if (showLoginNotMatchedErrorDialog) {
+        FttcAlertDialog("아이디와 비밀번호를 확인해 주세요.") {
+            showLoginNotMatchedErrorDialog = false
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -71,28 +98,39 @@ fun HomeScreen() {
                 Spacer(Modifier.height(24.dp))
                 LoginTypeTabRow(listOf("MOTP 입력", "생체인증(FIDO)"))
                 Spacer(Modifier.height(24.dp))
-                InputField(
-                    value = "id,",
-                    onValueChange = {},
-                    modifier = Modifier.fillMaxWidth()
+                FttcTextField(
+                    value = userId,
+                    onValueChange = { userId = it },
+                    Modifier.fillMaxWidth(),
+                    hint = "아이디"
                 )
                 Spacer(Modifier.height(12.dp))
-                InputField(
-                    value = "password,",
-                    onValueChange = {},
-                    modifier = Modifier.fillMaxWidth()
+                FttcTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    Modifier.fillMaxWidth(),
+                    hint = "비밀번호",
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
                 )
                 Spacer(Modifier.height(48.dp))
                 PrimaryFttcButton(
                     onClick = {
-                        context.startActivity(Intent(context, HomeActivity::class.java))
+                        if (userId.isEmpty()) {
+                            showLoginUserIdEmptyErrorDialog = true
+                        } else if (password.isEmpty()) {
+                            showLoginPasswordEmptyErrorDialog = true
+                        } else if (userId != password) {
+                            showLoginNotMatchedErrorDialog = true
+                        } else {
+                            context.startActivity(Intent(context, HomeActivity::class.java))
+                        }
                     },
                     text = stringResource(id = R.string.login),
                     modifier = Modifier.size(width = 400.dp, height = 56.dp))
             }
         }
     }
-
 }
 
 @Composable

@@ -36,6 +36,7 @@ fun FttcAlertDialog(
     title = "",
     message = message,
     buttonText = buttonText,
+    onConfirm = onConfirm,
 )
 
 @Composable
@@ -45,7 +46,7 @@ fun FttcAlertDialog(
     buttonText: String = stringResource(id = R.string.button_okay),
     onConfirm: (() -> Unit)? = null
 ) {
-    Dialog(onDismissRequest = { /*TODO*/ }) {
+    Dialog(onDismissRequest = {}) {
         Surface(
             color = FttcStyle.color.White,
             shape = RoundedCornerShape(16.dp)
@@ -158,14 +159,13 @@ fun PreviewNoTitleAlertDialog() {
 @Composable
 fun PreviewLongMessageAlertDialog() {
     val context = LocalContext.current
-        FttcTheme {
-        FttcAlertDialog(
-            """
+    FttcTheme {
+        FttcAlertDialog("""
 Dagger is a popular Dependency Injection framework commonly used in Android. 
 It provides fully static and compile-time dependencies addressing many of the development and performance issues that have reflection-based solutions.
 This month,a new tutorial was released to help you better understand how it works.
 This article focuses on using Dagger with Kotlin, including best practices to optimize your build time and gotchas you might encounter.
-            """.trimIndent()
+            """.trimIndent(),
         ) {
             Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
         }
