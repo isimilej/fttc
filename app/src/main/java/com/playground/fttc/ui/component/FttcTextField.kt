@@ -17,12 +17,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playground.fttc.ui.theme.FttcStyle
 
 @Composable
-fun InputField(
+fun FttcTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -30,6 +31,7 @@ fun InputField(
     enabled: Boolean = true,
     readOnly: Boolean = false,
     isError: Boolean = false,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
@@ -44,6 +46,7 @@ fun InputField(
             Text(text = hint, style = FttcStyle.typo.B2.copy(FttcStyle.color.Grey300))
         },
         isError = isError,
+        visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
         singleLine = true,
@@ -70,14 +73,14 @@ fun PreviewInputField() {
 
         var text by remember { mutableStateOf("") }
 
-        InputField(text, { text = it}, Modifier.width(400.dp), hint = "Place Holder")
+        FttcTextField(text, { text = it}, Modifier.width(400.dp), hint = "Place Holder")
         Spacer(Modifier.height(16.dp))
-        InputField("Disabled", { }, Modifier.width(400.dp), enabled = false)
+        FttcTextField("Disabled", { }, Modifier.width(400.dp), enabled = false)
 
         Spacer(Modifier.height(16.dp))
-        InputField("Ready Only", { }, Modifier.width(400.dp), enabled = false, readOnly = false)
+        FttcTextField("Ready Only", { }, Modifier.width(400.dp), enabled = false, readOnly = false)
 
         Spacer(Modifier.height(16.dp))
-        InputField("Error", { }, Modifier.width(400.dp), isError = true)
+        FttcTextField("Error", { }, Modifier.width(400.dp), isError = true)
     }
 }
