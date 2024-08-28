@@ -23,7 +23,6 @@ import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -45,28 +44,38 @@ import com.playground.fttc.R
 import com.playground.fttc.ui.component.FttcAlertDialog
 import com.playground.fttc.ui.component.FttcTextField
 import com.playground.fttc.ui.component.PrimaryFttcButton
-import com.playground.fttc.ui.home.HomeActivity
 import com.playground.fttc.ui.theme.FttcStyle
 import com.playground.fttc.ui.theme.FttcTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.playground.fttc.ui.home.HomeActivity
 
 @Composable
 fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     when (uiState) {
-        is LoginUiState.Error.EmptyUserIdError -> {
+        is LoginUiState.Success -> {
+            viewModel.ready()
+            val context = LocalContext.current
+            context.startActivity(Intent(context, HomeActivity::class.java))
+        }
+        is LoginUiState.Error.EmptyUserId -> {
             FttcAlertDialog("아이디를 입력해 주세요.") {
                 viewModel.ready()
             }
         }
-        is LoginUiState.Error.EmptyPasswordError -> {
+        is LoginUiState.Error.EmptyPassword -> {
             FttcAlertDialog("비밀번호를 입력해 주세요.") {
                 viewModel.ready()
             }
         }
-        is LoginUiState.Error.NotMatchedError -> {
+        is LoginUiState.Error.NotMatched -> {
             FttcAlertDialog("아이디와 비밀번호를 확인해 주세요.") {
+                viewModel.ready()
+            }
+        }
+        is LoginUiState.Error.NotFoundUser -> {
+            FttcAlertDialog("사용자를 찾을수 없습니다.") {
                 viewModel.ready()
             }
         }
@@ -74,8 +83,6 @@ fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
 
         }
     }
-
-    val context = LocalContext.current
 
     var userId by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
