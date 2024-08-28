@@ -23,6 +23,7 @@ import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -39,6 +40,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.playground.fttc.R
 import com.playground.fttc.ui.component.FttcAlertDialog
 import com.playground.fttc.ui.component.FttcTextField
@@ -46,32 +48,37 @@ import com.playground.fttc.ui.component.PrimaryFttcButton
 import com.playground.fttc.ui.home.HomeActivity
 import com.playground.fttc.ui.theme.FttcStyle
 import com.playground.fttc.ui.theme.FttcTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun HomeScreen() {
+fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
+
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    when (uiState) {
+        is LoginUiState.Error.EmptyUserIdError -> {
+            FttcAlertDialog("아이디를 입력해 주세요.") {
+                viewModel.ready()
+            }
+        }
+        is LoginUiState.Error.EmptyPasswordError -> {
+            FttcAlertDialog("비밀번호를 입력해 주세요.") {
+                viewModel.ready()
+            }
+        }
+        is LoginUiState.Error.NotMatchedError -> {
+            FttcAlertDialog("아이디와 비밀번호를 확인해 주세요.") {
+                viewModel.ready()
+            }
+        }
+        else -> {
+
+        }
+    }
 
     val context = LocalContext.current
 
-    var showLoginUserIdEmptyErrorDialog by rememberSaveable { mutableStateOf(false) }
-    var showLoginPasswordEmptyErrorDialog by rememberSaveable { mutableStateOf(false) }
-    var showLoginNotMatchedErrorDialog by rememberSaveable { mutableStateOf(false) }
-
     var userId by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
-
-    if (showLoginUserIdEmptyErrorDialog) {
-        FttcAlertDialog("아이디를 입력해 주세요.") {
-            showLoginUserIdEmptyErrorDialog = false
-        }
-    } else if (showLoginPasswordEmptyErrorDialog) {
-        FttcAlertDialog("비밀번호를 입력해 주세요.") {
-            showLoginPasswordEmptyErrorDialog = false
-        }
-    } else if (showLoginNotMatchedErrorDialog) {
-        FttcAlertDialog("아이디와 비밀번호를 확인해 주세요.") {
-            showLoginNotMatchedErrorDialog = false
-        }
-    }
 
     Box(
         modifier = Modifier
@@ -115,18 +122,10 @@ fun HomeScreen() {
                 )
                 Spacer(Modifier.height(48.dp))
                 PrimaryFttcButton(
-                    onClick = {
-                        if (userId.isEmpty()) {
-                            showLoginUserIdEmptyErrorDialog = true
-                        } else if (password.isEmpty()) {
-                            showLoginPasswordEmptyErrorDialog = true
-                        } else if (userId != password) {
-                            showLoginNotMatchedErrorDialog = true
-                        } else {
-                            context.startActivity(Intent(context, HomeActivity::class.java))
-                        }
-                    },
                     text = stringResource(id = R.string.login),
+                    onClick = {
+                        viewModel.login(userId, password)
+                    },
                     modifier = Modifier.size(width = 400.dp, height = 56.dp))
             }
         }
@@ -177,7 +176,7 @@ fun PreviewExpandedHomeContent() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            HomeScreen()
+            LoginScreen()
         }
     }
 }
