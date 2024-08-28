@@ -5,8 +5,9 @@ sealed interface LoginUiState {
     data object Loading : LoginUiState
     data object Success: LoginUiState
     sealed interface Error: LoginUiState {
-        data object EmptyUserIdError: Error
-        data object EmptyPasswordError: Error
-        data object NotMatchedError: Error
+        data object EmptyUserId: Error
+        data object EmptyPassword: Error
+        data object NotFoundUser: Error
+        data object NotMatched: Error
     }
 }
