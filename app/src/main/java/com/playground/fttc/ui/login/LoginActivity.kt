@@ -7,17 +7,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.playground.fttc.ui.home.HomeActivity
-import com.playground.fttc.ui.theme.FttcTheme
-import androidx.compose.ui.tooling.preview.Devices
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import com.playground.fttc.ui.home.HomeActivity
+import com.playground.fttc.ui.theme.FttcTheme
 
 class LoginActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,7 +28,7 @@ class LoginActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomeScreen()
+                    LoginScreen()
                 }
             }
         }
