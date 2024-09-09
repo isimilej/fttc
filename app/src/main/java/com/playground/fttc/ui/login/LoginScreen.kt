@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.playground.fttc.R
+import com.playground.fttc.data.user.FakeUserRepository
 import com.playground.fttc.ui.component.FttcAlertDialog
 import com.playground.fttc.ui.component.FttcTextField
 import com.playground.fttc.ui.component.HasCompactSize
@@ -54,7 +55,7 @@ import com.playground.fttc.ui.theme.FttcTheme
 @Composable
 fun LoginScreen(
     windowSizeClass: WindowSizeClass,
-    viewModel: LoginViewModel = viewModel()
+    viewModel: LoginViewModel
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     when (uiState) {
@@ -214,7 +215,10 @@ fun PreviewHomeScreenOnTablet() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            LoginScreen(WindowSizeClass())
+            LoginScreen(
+                WindowSizeClass(),
+                viewModel(factory = LoginViewModel.provideFactory(repository = FakeUserRepository()))
+            )
         }
     }
 }
@@ -227,7 +231,10 @@ fun PreviewHomeScreenOnFoldable() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            LoginScreen(WindowSizeClass())
+            LoginScreen(
+                WindowSizeClass(),
+                viewModel(factory = LoginViewModel.provideFactory(repository = FakeUserRepository()))
+            )
         }
     }
 }
@@ -238,7 +245,10 @@ fun PreviewHomeScreenOnFoldable() {
 fun PreviewHomeScreenOnPhoneLandscape() {
     FttcTheme {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-            LoginScreen(WindowSizeClass())
+            LoginScreen(
+                WindowSizeClass(),
+                viewModel(factory = LoginViewModel.provideFactory(repository = FakeUserRepository()))
+            )
         }
     }
 }

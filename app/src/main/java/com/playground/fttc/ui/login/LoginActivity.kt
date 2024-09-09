@@ -11,6 +11,8 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.playground.fttc.FttcApplication
 import com.playground.fttc.ui.theme.FttcTheme
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -22,11 +24,17 @@ class LoginActivity : ComponentActivity() {
             hide(WindowInsetsCompat.Type.navigationBars())
         }
 
+        val appContainer = (application as FttcApplication).container
+
         setContent {
             val windowSizeClass = calculateWindowSizeClass(this)
             FttcTheme {
                 Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    LoginScreen(windowSizeClass)
+                    LoginScreen(windowSizeClass, viewModel(
+                        factory = LoginViewModel.provideFactory(
+                            repository = appContainer.userRepository
+                        )
+                    ))
                 }
             }
         }
