@@ -3,11 +3,20 @@
 
     <!-- Common -->
     <string name="count">건</string>
+    <string name="error">오류</string>
     <string name="button_okay">확인</string>
     <string name="button_cancel">취소</string>
 
     <!-- 로그인 -->
+    <string name="input_type_motp">MOTP 입력</string>
+    <string name="input_type_fido">생체인증(FIDO)</string>
+    <string name="id">아이디</string>
+    <string name="password">비밀번호</string>
     <string name="login">로그인</string>
+    <string name="input_user_id">아이디를 입력해 주세요.</string>
+    <string name="input_password">비밀번호를 입력해 주세요.</string>
+    <string name="check_user_id_and_password">아이디와 비밀번호를 확인해 주세요.</string>
+    <string name="not_found_user">사용자를 찾을수 없습니다.</string>
 
     <!-- 홈 -->
     <string name="extension_of_period_customer">여신 기간연장\n서식 작성 가능 고객</string>
