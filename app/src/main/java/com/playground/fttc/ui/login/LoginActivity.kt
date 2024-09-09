@@ -1,18 +1,19 @@
 package com.playground.fttc.ui.login
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import com.playground.fttc.ui.home.HomeActivity
 import com.playground.fttc.ui.theme.FttcTheme
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,24 +23,12 @@ class LoginActivity : ComponentActivity() {
         }
 
         setContent {
+            val windowSizeClass = calculateWindowSizeClass(this)
             FttcTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    LoginScreen()
+                Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                    LoginScreen(windowSizeClass)
                 }
             }
         }
-    }
-
-    private fun goHome() {
-        startActivity(Intent(this, HomeActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        })
     }
 }
