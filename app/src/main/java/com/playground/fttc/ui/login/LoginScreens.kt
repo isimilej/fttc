@@ -21,13 +21,13 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,89 +45,93 @@ import com.playground.fttc.R
 import com.playground.fttc.data.user.FakeUserRepository
 import com.playground.fttc.ui.component.FttcAlertDialog
 import com.playground.fttc.ui.component.FttcTextField
-import com.playground.fttc.ui.component.HasCompactSize
 import com.playground.fttc.ui.component.PrimaryFttcButton
 import com.playground.fttc.ui.component.WindowSizeClass
 import com.playground.fttc.ui.home.HomeActivity
 import com.playground.fttc.ui.theme.FttcStyle
 import com.playground.fttc.ui.theme.FttcTheme
 
-@Composable
-fun LoginScreen(
-    windowSizeClass: WindowSizeClass,
-    viewModel: LoginViewModel
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    when (uiState) {
-        is LoginUiState.Success -> {
-            viewModel.ready()
-            val context = LocalContext.current
-            context.startActivity(Intent(context, HomeActivity::class.java))
-        }
-        is LoginUiState.Error.EmptyUserId -> {
-            FttcAlertDialog("아이디를 입력해 주세요.") {
-                viewModel.ready()
-            }
-        }
-        is LoginUiState.Error.EmptyPassword -> {
-            FttcAlertDialog("비밀번호를 입력해 주세요.") {
-                viewModel.ready()
-            }
-        }
-        is LoginUiState.Error.NotMatched -> {
-            FttcAlertDialog("아이디와 비밀번호를 확인해 주세요.") {
-                viewModel.ready()
-            }
-        }
-        is LoginUiState.Error.NotFoundUser -> {
-            FttcAlertDialog("사용자를 찾을수 없습니다.") {
-                viewModel.ready()
-            }
-        }
-        else -> {
+private enum class LoginFormType {
+    Compact,
+    InCard
+}
 
-        }
+private fun getLoginFormType(windowSizeClass: WindowSizeClass): LoginFormType {
+    if (windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact
+        || windowSizeClass.heightSizeClass == WindowHeightSizeClass.Compact) {
+        return LoginFormType.Compact
+    } else {
+        return LoginFormType.InCard
     }
+}
 
-    var userId by rememberSaveable { mutableStateOf("") }
-    var password by rememberSaveable { mutableStateOf("") }
+@Composable
+fun LoginScreen(windowSizeClass: WindowSizeClass, viewModel: LoginViewModel) {
+
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val formType = getLoginFormType(windowSizeClass)
 
     Box(
-        modifier = Modifier
+        Modifier
             .fillMaxSize()
             .background(FttcStyle.color.Background),
         contentAlignment = Alignment.Center,
     ) {
-        if (HasCompactSize(windowSizeClass)) {
-            Column(Modifier.width(360.dp)) {
-                LoginForm(
-                    userId = userId,
-                    onChangeUserId = { userId = it },
-                    password = password,
-                    onChangePassword = { password = it },
-                    onLogin = { viewModel.login(userId, password) }
-                )
-            }
+        if (formType == LoginFormType.Compact) {
+            LoginForm(
+                userId = viewModel.userId,
+                onChangeUserId = { viewModel.updateUserId(it) },
+                password = viewModel.password,
+                onChangePassword = { viewModel.updatePassword(it) },
+                onLogin = { viewModel.login() },
+                modifier = Modifier.width(360.dp)
+            )
         } else {
             Card(
                 shape = RoundedCornerShape(32.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = FttcStyle.color.White
-                ),
-                elevation = CardDefaults.outlinedCardElevation(
-                    defaultElevation = 16.dp
-                ),
+                colors = CardDefaults.cardColors(containerColor = FttcStyle.color.White),
+                elevation = CardDefaults.outlinedCardElevation(defaultElevation = 16.dp),
             ) {
-                Column(Modifier.width(460.dp).padding(40.dp)) {
-                    LoginForm(
-                        userId = userId,
-                        onChangeUserId = { userId = it },
-                        password = password,
-                        onChangePassword = { password = it },
-                        onLogin = { viewModel.login(userId, password) },
-                    )
+                LoginForm(
+                    userId = viewModel.userId,
+                    onChangeUserId = { viewModel.updateUserId(it) },
+                    password = viewModel.password,
+                    onChangePassword = { viewModel.updatePassword(it) },
+                    onLogin = { viewModel.login() },
+                    modifier = Modifier
+                        .width(460.dp)
+                        .padding(40.dp)
+                )
+            }
+        }
+    }
+
+    when (val state = uiState) {
+        is LoginUiState.Success -> {
+            val context = LocalContext.current
+            context.startActivity(Intent(context, HomeActivity::class.java))
+        }
+        is LoginUiState.Error -> {
+            val errorMessage = when (state) {
+                is LoginUiState.Error.EmptyUserId -> {
+                    stringResource(id = R.string.input_user_id)
+                }
+                is LoginUiState.Error.EmptyPassword -> {
+                    stringResource(id = R.string.input_password)
+                }
+                is LoginUiState.Error.NotMatched -> {
+                    stringResource(id = R.string.check_user_id_and_password)
+                }
+                is LoginUiState.Error.NotFoundUser -> {
+                    stringResource(id = R.string.not_found_user)
                 }
             }
+            FttcAlertDialog(errorMessage) {
+                viewModel.ready()
+            }
+        }
+        else -> {
+            // ignored
         }
     }
 }
@@ -139,25 +143,25 @@ fun LoginForm(
     password: String,
     onChangePassword: (String) -> Unit,
     onLogin: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(
+        modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Login", style = FttcStyle.typo.H1Bold)
-        Spacer(Modifier.height(24.dp))
         LoginTypeTabRow()
         Spacer(Modifier.height(24.dp))
         FttcTextField(
             value = userId,
             onValueChange = onChangeUserId,
-            Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             hint = "아이디"
         )
         Spacer(Modifier.height(12.dp))
         FttcTextField(
             value = password,
             onValueChange = onChangePassword,
-            Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             hint = "비밀번호",
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
@@ -166,7 +170,9 @@ fun LoginForm(
         PrimaryFttcButton(
             text = stringResource(id = R.string.login),
             onClick = onLogin,
-            modifier = Modifier.fillMaxWidth().height(56.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
         )
     }
 }
