@@ -6,7 +6,7 @@ import com.playground.fttc.domain.user.UserRepository
 
 class FakeUserRepository : UserRepository {
 
-    private val users = listOf(User("kwangjin", "KW.Jin", "1111"))
+    private val users = listOf(User("kwangjin", "임광진", "1111"))
 
     override fun login(userId: String, password: String): LoginResult {
         users.forEach {

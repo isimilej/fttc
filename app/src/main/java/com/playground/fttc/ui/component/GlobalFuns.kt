@@ -10,12 +10,6 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun HasCompactSize(
-    windowSizeClass: WindowSizeClass,
-) =
-    windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact || windowSizeClass.heightSizeClass == WindowHeightSizeClass.Compact
-
-@Composable
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 fun WindowSizeClass(): WindowSizeClass {
     val configuration = LocalConfiguration.current
