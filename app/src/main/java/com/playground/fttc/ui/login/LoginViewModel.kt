@@ -9,6 +9,7 @@ import com.playground.fttc.domain.user.LoginResult
 import com.playground.fttc.domain.user.UserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class LoginViewModel(
     private val repository: UserRepository,
@@ -43,7 +44,9 @@ class LoginViewModel(
         } else {
             when (val result = repository.login(userId, password)) {
                 is LoginResult.Success -> {
-                    _uiState.value = LoginUiState.Success
+                    // check login type.
+                    // _uiState.value = LoginUiState.Success
+                    _uiState.value = LoginUiState.RequestFidoAuth
                 }
                 is LoginResult.Fail -> {
                     when (result) {

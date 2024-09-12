@@ -23,6 +23,7 @@ class LoginActivity : ComponentActivity() {
         WindowCompat.getInsetsController(window, window.decorView).apply {
             hide(WindowInsetsCompat.Type.navigationBars())
         }
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         val appContainer = (application as FttcApplication).container
 
