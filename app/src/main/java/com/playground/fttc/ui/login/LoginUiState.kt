@@ -3,6 +3,7 @@ package com.playground.fttc.ui.login
 sealed class LoginUiState {
     data object Ready : LoginUiState()
     data object Loading : LoginUiState()
+    data object RequestFidoAuth : LoginUiState()
     data object Success : LoginUiState()
 
     sealed class Error : LoginUiState() {

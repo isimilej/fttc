@@ -14,7 +14,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -83,7 +85,9 @@ fun LoginScreen(windowSizeClass: WindowSizeClass, viewModel: LoginViewModel) {
                 onChangeUserId = { viewModel.updateUserId(it) },
                 password = viewModel.password,
                 onChangePassword = { viewModel.updatePassword(it) },
-                onLogin = { viewModel.login() },
+                onLogin = {
+                    viewModel.login()
+                },
                 modifier = Modifier.width(360.dp)
             )
         } else {
@@ -104,12 +108,17 @@ fun LoginScreen(windowSizeClass: WindowSizeClass, viewModel: LoginViewModel) {
                 )
             }
         }
+
+        //FidoAuthNoticeBottomSheet()
     }
 
     when (val state = uiState) {
         is LoginUiState.Success -> {
             val context = LocalContext.current
             context.startActivity(Intent(context, HomeActivity::class.java))
+        }
+        is LoginUiState.RequestFidoAuth -> {
+            FidoAuthNoticeBottomSheet()
         }
         is LoginUiState.Error -> {
             val errorMessage = when (state) {
